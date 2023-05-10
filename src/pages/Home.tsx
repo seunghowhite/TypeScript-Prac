@@ -1,7 +1,8 @@
 import React from "react";
+import Study1 from "../study/Study1";
 
 function Home() {
-  return <div>Home</div>;
+  return <Study1 />;
 }
 
 export default Home;

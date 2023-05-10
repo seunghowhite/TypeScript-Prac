@@ -6,6 +6,7 @@ import Study4 from "../study/Study4";
 import Study5 from "../study/Study5";
 import Study6 from "../study/Study6";
 import Study7 from "../study/Study7";
+import Study8 from "../study/Study8";
 
 function Home() {
   return (
@@ -16,7 +17,8 @@ function Home() {
       {/* <Study4 /> */}
       {/* <Study5 /> */}
       {/* <Study6 /> */}
-      <Study7 />
+      {/* <Study7 /> */}
+      <Study8 />
     </>
   );
 }

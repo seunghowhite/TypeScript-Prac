@@ -1,9 +1,10 @@
 import React from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
+import Router from "./shared/Router";
 
 function App() {
-  return <h1>타입스크립트 연습</h1>;
+  return <Router />;
 }
 
 export default App;

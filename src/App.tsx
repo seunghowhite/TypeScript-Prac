@@ -1,10 +1,15 @@
 import React from "react";
-// import logo from "./logo.svg";
 import "./App.css";
 import Router from "./shared/Router";
+import { GlobalStyle } from "./shared/GlobalStyle";
 
 function App() {
-  return <Router />;
+  return (
+    <>
+      <GlobalStyle />
+      <Router />
+    </>
+  );
 }
 
 export default App;

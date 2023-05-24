@@ -27,6 +27,11 @@ function Home() {
         articleprice: shopList.articleprice,
       },
     ]);
+    setShopList(templete);
+  };
+
+  const deletecard = (index: number) => {
+    setBuyList(buyList.filter((item) => item !== buyList[index]));
   };
 
   return (
@@ -52,12 +57,13 @@ function Home() {
 
       {buyList.map((item, index) => {
         return (
-          <div key={index}>
+          <Cards key={index}>
             <span>이름</span>
             {item.articlename}
             <span>가격</span>
             {item.articleprice}
-          </div>
+            <button onClick={() => deletecard(index)}>삭제</button>
+          </Cards>
         );
       })}
     </>
@@ -65,6 +71,11 @@ function Home() {
 }
 
 export default Home;
+
+const Cards = styled.div`
+  border-radius: 2px;
+  border: 1px solid black;
+`;
 
 const ShopInputBox = styled.form``;
 

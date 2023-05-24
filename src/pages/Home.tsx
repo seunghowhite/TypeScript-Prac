@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Cards from "../components/Cards";
+export interface BuyItem {
+  articlename: string;
+  articleprice: number;
+}
+
 function Home() {
-  const templete: { articlename: string; articleprice: number } = {
+  const templete: BuyItem = {
     articlename: "",
     articleprice: 0,
   };
-  interface BuyItem {
-    articlename: string;
-    articleprice: number;
-  }
   const [shopList, setShopList] = useState(templete);
   const [buyList, setBuyList] = useState<BuyItem[]>([]);
+  console.log("buyList: ", buyList);
+
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setShopList((pre): { articlename: string; articleprice: number } => {
@@ -28,10 +32,6 @@ function Home() {
       },
     ]);
     setShopList(templete);
-  };
-
-  const deletecard = (index: number) => {
-    setBuyList(buyList.filter((item) => item !== buyList[index]));
   };
 
   return (
@@ -56,26 +56,13 @@ function Home() {
       </ShopHeader>
 
       {buyList.map((item, index) => {
-        return (
-          <Cards key={index}>
-            <span>이름</span>
-            {item.articlename}
-            <span>가격</span>
-            {item.articleprice}
-            <button onClick={() => deletecard(index)}>삭제</button>
-          </Cards>
-        );
+        return <Cards item={item} index={index} setBuyList={setBuyList} />;
       })}
     </>
   );
 }
 
 export default Home;
-
-const Cards = styled.div`
-  border-radius: 2px;
-  border: 1px solid black;
-`;
 
 const ShopInputBox = styled.form``;
 

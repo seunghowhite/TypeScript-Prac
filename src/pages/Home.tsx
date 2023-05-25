@@ -1,34 +1,41 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Cards from "../components/Cards";
+
 export interface BuyItem {
   articlename: string;
   articleprice: number;
+  buied: boolean;
+  id: number;
 }
 
 function Home() {
   const templete: BuyItem = {
     articlename: "",
     articleprice: 0,
+    buied: false,
+    id: 0,
   };
   const [shopList, setShopList] = useState(templete);
   const [buyList, setBuyList] = useState<BuyItem[]>([]);
-  console.log("buyList: ", buyList);
-
+  let buyid = useRef(0);
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setShopList((pre): { articlename: string; articleprice: number } => {
+    setShopList((pre): BuyItem => {
       return { ...pre, [name]: value };
     });
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    buyid.current++;
     setBuyList([
       ...buyList,
       {
         articlename: shopList.articlename,
         articleprice: shopList.articleprice,
+        buied: false,
+        id: buyid.current,
       },
     ]);
     setShopList(templete);
@@ -38,7 +45,7 @@ function Home() {
     <>
       <ShopHeader>
         <ShopH1>ShopingList</ShopH1>
-        <ShopInputBox onSubmit={onSubmit}>
+        <form onSubmit={onSubmit}>
           <span>상품명</span>
           <input
             value={shopList.articlename}
@@ -52,19 +59,49 @@ function Home() {
             onChange={onchange}
           />
           <button>제출</button>
-        </ShopInputBox>
+        </form>
       </ShopHeader>
-
-      {buyList.map((item, index) => {
-        return <Cards item={item} index={index} setBuyList={setBuyList} />;
-      })}
+      <ShopInputBox>
+        <span>구매전</span>
+        {buyList
+          .filter((item) => item.buied === false)
+          .map((item) => {
+            return (
+              <Cards
+                item={item}
+                id={item.id}
+                setBuyList={setBuyList}
+                key={item.id}
+              />
+            );
+          })}
+      </ShopInputBox>
+      <ShopInputBox>
+        <span>구매완료</span>
+        {buyList
+          .filter((item) => item.buied === true)
+          .map((item) => {
+            return (
+              <Cards
+                item={item}
+                id={item.id}
+                setBuyList={setBuyList}
+                key={item.id}
+              />
+            );
+          })}
+      </ShopInputBox>
     </>
   );
 }
 
 export default Home;
 
-const ShopInputBox = styled.form``;
+const ShopInputBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
 
 const ShopHeader = styled.div`
   gap: 1em;

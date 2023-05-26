@@ -110,5 +110,5 @@ const ItemCards = styled.div`
   border-radius: 2px;
   border: 1px solid black;
   height: 10em;
-  width: 10em;
+  min-width: 200px;
 `;

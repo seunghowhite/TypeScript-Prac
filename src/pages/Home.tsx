@@ -61,8 +61,8 @@ function Home() {
           <button>제출</button>
         </form>
       </ShopHeader>
+      <ShoptTitle>구매전</ShoptTitle>
       <ShopInputBox>
-        <span>구매전</span>
         {buyList
           .filter((item) => item.buied === false)
           .map((item) => {
@@ -76,8 +76,8 @@ function Home() {
             );
           })}
       </ShopInputBox>
+      <ShoptTitle>구매완료</ShoptTitle>
       <ShopInputBox>
-        <span>구매완료</span>
         {buyList
           .filter((item) => item.buied === true)
           .map((item) => {
@@ -97,20 +97,31 @@ function Home() {
 
 export default Home;
 
+const ShoptTitle = styled.div`
+  font-size: 2em;
+  font-weight: 3em;
+  margin: 10px 40px;
+`;
+
 const ShopInputBox = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  overflow-x: scroll;
   gap: 10px;
+  min-height: 8em;
+  margin: 0 40px;
+  border: 1px solid black;
+  padding: 1em;
 `;
 
 const ShopHeader = styled.div`
   gap: 1em;
-  background-color: #d7eaec;
+  background-color: #000000;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100px;
   font-size: 16px;
+  color: #ffffff;
 `;
 const ShopH1 = styled.h1`
   font-size: 2em;
